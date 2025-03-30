@@ -34,6 +34,22 @@
         </div>
       </div>
     </nav>
+    <div class="search-container">
+      <div class="relative flex items-center">
+        <input
+          type="text"
+          id="searchBar"
+          placeholder="Search for a car..."
+          class="search-bar"
+        />
+        <button
+          id="search-btn"
+          class="bg-blue-500 text-white px-4 py-2 rounded-r-full hover:bg-blue-600 transition"
+        >
+          🔍
+        </button>
+      </div>
+    </div>
 
     <div class="pt-24">
       <div class="mc-container">
@@ -75,6 +91,7 @@
       <source src="../assets/car-sound.mp3" type="audio/mpeg" />
       Your browser does not support the audio tag.
     </audio>
+    <!-- search bar  -->
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
@@ -138,9 +155,59 @@
         }
       }
 
-      typeText(); // Start the typing effect
-      // Start the typing effect // Start the typing effect
+      typeText();
+
+      // functionality code for search Bar
+      document.addEventListener("DOMContentLoaded", function () {
+        const searchBar = document.getElementById("searchBar");
+        const collectionContainer = document.getElementById(
+          "my-collection-container"
+        );
+
+        searchBar.addEventListener("input", function () {
+          const query = searchBar.value.toLowerCase();
+          filterCollection(query);
+        });
+
+        function filterCollection(query) {
+          const myCollection =
+            JSON.parse(localStorage.getItem("myCollection")) || [];
+          collectionContainer.innerHTML = ""; // Clear previous display
+
+          let found = false;
+
+          myCollection.forEach((car) => {
+            if (
+              car.name.toLowerCase().includes(query) ||
+              car.series.toLowerCase().includes(query)
+            ) {
+              found = true;
+              const carCard = document.createElement("div");
+              carCard.classList.add("car-card");
+
+              carCard.innerHTML = `
+          <img src="${car.image}" class="car-image" alt="${car.name}">
+          <h3>${car.name} (${car.year})</h3>
+          <p><strong>Series:</strong> ${car.series}</p>
+        `;
+
+              collectionContainer.appendChild(carCard);
+            }
+          });
+
+          // If no cars match the search, show a "No cars found" message
+          if (!found) {
+            collectionContainer.innerHTML = `
+        <p class="no-cars-message">No cars found in your collection.</p>
+      `;
+          }
+        }
+
+        // Load collection on page load
+        filterCollection("");
+      });
     </script>
+    <script src="../js/mycollection.js"></script>
 
     <footer class="bg-blue-600 text-white text-center p-4 mt-10">
       &copy; 2025 Hot Wheels Collection | Made by Sharique

@@ -5,8 +5,7 @@
     "year": 1999,
     "series": "Fast & Furious",
     "image": "https://images-cdn.u-buy.co.uk/646206b21a7be06d0f237dd1-hot-wheels-2010-keys-to-speed-nissan.jpg",
-    "category": "STH",
-    "price": "₹1,499"
+    "category": "STH"
   },
   {
     "id": 2,
@@ -14,8 +13,7 @@
     "year": 1994,
     "series": "Fast & Furious",
     "image": "https://m.media-amazon.com/images/I/71Muq0FnerL.jpg",
-    "category": "Mainline",
-    "price": "₹179"
+    "category": "Mainline"
   },
   {
     "id": 3,
@@ -23,8 +21,7 @@
     "year": 1969,
     "series": "Muscle Mania",
     "image": "https://toys-india.com/cdn/shop/files/1969ChevyCamaroBlueColour_05a60094-2516-439e-859c-f297d58f5aa9.jpg?v=1713348334",
-    "category": "Mainline",
-    "price": "₹179"
+    "category": "Mainline"
   },
   {
     "id": 4,
@@ -32,8 +29,7 @@
     "year": 1971,
     "series": "Muscle Mania",
     "image": "https://m.media-amazon.com/images/I/81-K7Q96jNL.jpg",
-    "category": "STH",
-    "price": "₹1,499"
+    "category": "STH"
   },
   {
     "id": 5,

@@ -7,7 +7,6 @@ const carSchema = new mongoose.Schema({
   series: String,
   image: String,
   category: String,
-  price: String,
   // Ensure this field exists
   ownedByUser: { type: Boolean, default: false }, // Ensure this field exists
   inCollection: { type: Boolean, default: false }, // Ensure this field exists

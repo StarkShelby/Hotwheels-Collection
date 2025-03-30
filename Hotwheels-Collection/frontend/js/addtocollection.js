@@ -1,5 +1,5 @@
 function fadeInPage() {
-  document.body.style.opacity = 1;
+  document.body.style.opacity = 0.7;
 }
 
 function addToCollection(carName, carImage, carYear, carSeries) {

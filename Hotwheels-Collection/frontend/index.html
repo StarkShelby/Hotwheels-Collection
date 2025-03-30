@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>🏎️Hot Wheels Collection</title>
+    <link rel="stylesheet" href="./css/styles.css" />
+
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
 
@@ -195,6 +197,116 @@
     </div>
 
     <script src="./js/animation.js"></script>
+
+    <!-- homepage-sections.html -->
+    <div id="featured-collections">
+      <h2 class="featured-title">Featured Collections</h2>
+      <div class="featured-scroll">
+        <div
+          class="collection-card"
+          data-url="https://zoomsters.in/blogs/hot-wheels/the-thrill-of-the-hunt-a-collector-s-guide-to-hot-wheels-super-treasure-hunts?_pos=2&_sid=175f28ff1&_ss=r"
+        >
+          <img
+            src="https://i.rockcdn.us/i/sdr/ministries/wheels/66c590daab83bcbb8d89241c5d2c6f14.jpg"
+            alt="Super Treasure Hunt"
+          />
+          <h3>Super Treasure Hunt</h3>
+          <p>Rare & valuable cars to enhance your collection.</p>
+        </div>
+        <div
+          class="collection-card"
+          data-url="https://hotwheels.fandom.com/wiki/Hot_Wheels_Legends_50th_Anniversary_Tour"
+        >
+          <img
+            src="https://i.ebayimg.com/images/g/y5MAAOSwTY9lWQkt/s-l400.png"
+            alt="Legends Tour"
+          />
+          <h3>Legends Tour</h3>
+          <p>Exclusive cars from the legendary Hot Wheels tour.</p>
+        </div>
+        <div
+          class="collection-card"
+          data-url="https://hotwheels.fandom.com/wiki/Hot_Wheels_Classics"
+        >
+          <img
+            src="https://i.etsystatic.com/14603282/r/il/6c5fc2/3296071698/il_570xN.3296071698_1eed.jpg"
+            alt="Classic Series"
+          />
+          <h3>Classic Series</h3>
+          <p>A timeless collection of vintage Hot Wheels.</p>
+        </div>
+        <div
+          class="collection-card"
+          data-url="https://hotwheels.fandom.com/wiki/Mainline"
+        >
+          <img
+            src="https://i.pinimg.com/736x/94/de/cf/94decff4c12785bd998e21d7b6c9c4b9.jpg"
+            alt="Mainline"
+          />
+          <h3>Mainline</h3>
+          <p>Popular models from the mainline series.</p>
+        </div>
+        <div
+          class="collection-card"
+          data-url="https://hotwheels.fandom.com/wiki/Treasure_Hunt"
+        >
+          <img
+            src="https://i.etsystatic.com/25240650/r/il/42a9ff/6000789356/il_fullxfull.6000789356_tsjj.jpg"
+            alt="Treasure Hunt"
+          />
+          <h3>Treasure Hunt</h3>
+          <p>Hidden gems in every collector’s dream.</p>
+        </div>
+        <div
+          class="collection-card"
+          data-url="https://hotwheels.fandom.com/wiki/Red_Line_Club"
+        >
+          <img
+            src="https://i.ebayimg.com/images/g/bCgAAOSwVL1l~hkn/s-l1600.jpg"
+            alt="Red Line Cars"
+          />
+          <h3>Red Line Club</h3>
+          <p>The ultra luxury of your collection</p>
+        </div>
+      </div>
+    </div>
+    <div class="video-container">
+      <video id="hotwheels-video" controls autoplay muted loop>
+        <source src="./assets/New Project.mp4" type="video/mp4" />
+        Your browser does not support the video tag.
+      </video>
+    </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const cards = document.querySelectorAll(".collection-card");
+
+        cards.forEach((card) => {
+          card.addEventListener("click", function () {
+            const url = this.getAttribute("data-url");
+            if (url) {
+              window.open(url, "_blank"); // Opens in a new tab
+            }
+          });
+        });
+      });
+    </script>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const homepageContainer = document.getElementById("homepage-container");
+        if (homepageContainer) {
+          fetch("homepage-sections.html")
+            .then((response) => response.text())
+            .then((html) => {
+              homepageContainer.innerHTML = html;
+            })
+            .catch((error) =>
+              console.error("Error loading homepage sections:", error)
+            );
+        }
+      });
+    </script>
 
     <!-- Footer -->
     <footer class="bg-blue-600 text-white text-center p-4 mt-8">
