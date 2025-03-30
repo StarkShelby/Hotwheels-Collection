@@ -259,6 +259,49 @@ body {
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+.mc-container {
+  position: relative;
+  display: inline-block;
+}
+
+.mc-container img {
+  display: block;
+  transition: filter 0.3s ease-in-out;
+}
+
+/* Left Headlamp Glow */
+.mc-container::before,
+.mc-container::after {
+  content: "";
+  position: absolute;
+  width: 80px; /* Adjust width based on headlamp size */
+  height: 20px; /* Adjust height based on headlamp size */
+  background: radial-gradient(
+    circle,
+    rgba(255, 255, 150, 0.9),
+    rgba(255, 255, 150, 0)
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+  filter: blur(5px);
+}
+
+/* Adjust positions of the headlamp glow */
+.mc-container::before {
+  top: 51%; /* Adjust to match left headlamp */
+  left: 17%; /* Adjust to match left headlamp */
+}
+
+.mc-container::after {
+  top: 57%; /* Adjust to match right headlamp */
+  right: 67%; /* Adjust to match right headlamp */
+}
+
+/* Show glow on hover */
+.mc-container:hover::before,
+.mc-container:hover::after {
+  opacity: 1.8;
+}
 
 .active-click:active {
   transform: scale(0.9);
@@ -510,4 +553,13 @@ h3 {
   padding: 1rem;
   text-transform: uppercase;
   animation: neonBounce 1.5s infinite alternate ease-in-out;
+}
+
+.flying-car-animation {
+  position: fixed;
+  width: 80px; /* Adjust as needed */
+  height: auto;
+  z-index: 1000;
+  pointer-events: none;
+  transition: transform 0.8s ease-in-out, opacity 0.8s;
 }
