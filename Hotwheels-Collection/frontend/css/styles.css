@@ -1,7 +1,3 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
 img {
   object-fit: cover;
   height: 200px;
@@ -106,6 +102,34 @@ html {
   border-radius: 10px;
 }
 
+#mycollection-page .car-card {
+  width: 200px; /* Reduce width */
+  height: auto; /* Auto height */
+  padding: 10px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+#mycollection-page .car-card img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+}
+
+#mycollection-page .car-card h3 {
+  font-size: 14px;
+}
+
+#mycollection-page .car-card p {
+  font-size: 12px;
+}
+
+#mycollection-page .remove-btn {
+  font-size: 12px;
+  padding: 6px 10px;
+}
 #my-collection-container {
   margin-left: 2%;
   display: grid;
@@ -118,6 +142,7 @@ html {
   transform: scale(1.1);
   background: rgb(114, 92, 224);
 }
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -555,40 +580,53 @@ h3 {
   animation: neonBounce 1.5s infinite alternate ease-in-out;
 }
 
-.flying-card {
-  position: fixed;
-  width: 100px; /* Adjust size */
-  height: auto;
-  z-index: 9999;
-  pointer-events: none;
-  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+.car-card {
+  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
 }
 
-.flying-card {
-  animation: flyToCollection 1s ease-in-out forwards;
-}
-
-@keyframes flyToCollection {
-  from {
-    transform: scale(1);
-    opacity: 1;
-  }
-  to {
-    transform: translate(-50vw, -50vh) scale(0.2);
-    opacity: 0;
-  }
-}
-@keyframes fadeDiagonalOut {
+/* remove wiping effect */
+@keyframes realisticRemove {
   0% {
     opacity: 1;
-    transform: translate(0, 0) scale(1);
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  25% {
+    opacity: 0.8;
+    transform: translate(-10px, -10px) scale(0.95) rotate(-5deg);
+  }
+  50% {
+    opacity: 0.5;
+    transform: translate(20px, 20px) scale(0.8) rotate(10deg);
+  }
+  75% {
+    opacity: 0.2;
+    transform: translate(40px, 40px) scale(0.6) rotate(20deg);
   }
   100% {
     opacity: 0;
-    transform: translate(50px, 50px) scale(0.3);
+    transform: translate(60px, 60px) scale(0.3) rotate(30deg);
   }
 }
 
 .removing {
-  animation: fadeDiagonalOut 0.5s ease-in-out forwards;
+  animation: realisticRemove 1.2s ease-in-out forwards;
+}
+
+.hidden-message {
+  position: fixed;
+  top: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 128, 0, 0.8);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 5px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+  font-size: 16px;
+  opacity: 0;
+  transition: opacity 0.5s ease-in-out;
+}
+
+.hidden-message.show {
+  opacity: 1;
 }

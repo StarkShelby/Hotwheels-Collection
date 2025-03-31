@@ -35,13 +35,49 @@ function displayMyCollection() {
     });
   });
 }
+function createCarCard(car, index, isCollection = false) {
+  let card = document.createElement("div");
+  card.classList.add("car-card");
+
+  card.innerHTML = `
+    <img src="${car.image}" alt="${car.name}" class="car-image">
+    <h3>${car.name}</h3>
+    <p>Year: ${car.year} | Series: ${car.series}</p>
+    ${
+      isCollection
+        ? `<button class="remove-btn" onclick="removeCarFromCollection(${index})">Remove</button>`
+        : ""
+    }
+  `;
+
+  return card;
+}
 
 // Function to remove car from localStorage and update UI
 function removeCarFromCollection(index) {
   let myCollection = JSON.parse(localStorage.getItem("myCollection")) || [];
-  myCollection.splice(index, 1); // Remove car from array
-  localStorage.setItem("myCollection", JSON.stringify(myCollection)); // Save updated list
-  displayMyCollection(); // Refresh UI
+  let carCards = document.querySelectorAll(".car-card");
+
+  if (carCards[index]) {
+    let card = carCards[index];
+
+    // Apply animation class
+    card.classList.add("removing");
+
+    // Generate dust particles for realism
+    createDustEffect(card);
+
+    setTimeout(() => {
+      card.remove(); // Remove from DOM after animation
+
+      // Remove from localStorage
+      myCollection.splice(index, 1);
+      localStorage.setItem("myCollection", JSON.stringify(myCollection));
+
+      // Refresh collection view
+      displayMyCollection();
+    }, 1200); // Match animation duration
+  }
 }
 
 // Call function to display the collection when the page loads
@@ -99,8 +135,10 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
         carsContainer.appendChild(carElement);
       });
-      displayCars(cars);
     }
+
+    // Initial display
+    displayCars(cars);
 
     // Search function
     function searchCars() {
@@ -120,4 +158,28 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error fetching cars:", error);
   }
+});
+
+document.getElementById("searchBar").addEventListener("input", function () {
+  let searchQuery = this.value.trim().toLowerCase();
+  let myCollection = JSON.parse(localStorage.getItem("myCollection")) || [];
+  let collectionContainer = document.getElementById("collection-container");
+
+  collectionContainer.innerHTML = ""; // Clear the container
+
+  // If search is empty, show full collection with remove buttons
+  if (searchQuery === "") {
+    displayMyCollection(); // Call the function that renders all cards with the remove button
+    return;
+  }
+
+  // Filter and display only matching items
+  let filteredCars = myCollection.filter((car) =>
+    car.name.toLowerCase().includes(searchQuery)
+  );
+
+  filteredCars.forEach((car, index) => {
+    let card = createCarCard(car, index, true); // Ensure remove button is included
+    collectionContainer.appendChild(card);
+  });
 });

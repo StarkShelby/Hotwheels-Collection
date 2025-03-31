@@ -64,3 +64,30 @@ function animateCardFlyToCollection(card, imageSrc) {
     flyingImage.remove();
   }, 1000);
 }
+
+function showCollectionMessage(message, isError = false) {
+  let messageBox = document.getElementById("collection-message");
+  messageBox.innerText = message;
+  messageBox.style.background = isError
+    ? "rgba(255, 0, 0, 0.8)"
+    : "rgba(0, 128, 0, 0.8)"; // Red for error, Green for success
+  messageBox.classList.add("show");
+
+  setTimeout(() => {
+    messageBox.classList.remove("show");
+  }, 2000); // Hide after 2 seconds
+}
+
+function addToCollection(name, image, year, series, event) {
+  let myCollection = JSON.parse(localStorage.getItem("myCollection")) || [];
+
+  if (myCollection.some((car) => car.name === name)) {
+    showCollectionMessage("Car already added!", true); // Show red message
+    return;
+  }
+
+  myCollection.push({ name, image, year, series });
+  localStorage.setItem("myCollection", JSON.stringify(myCollection));
+
+  showCollectionMessage("Car added successfully!"); // Show green message
+}
