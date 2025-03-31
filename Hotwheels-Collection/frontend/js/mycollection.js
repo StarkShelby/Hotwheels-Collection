@@ -99,10 +99,8 @@ document.addEventListener("DOMContentLoaded", async () => {
         `;
         carsContainer.appendChild(carElement);
       });
+      displayCars(cars);
     }
-
-    // Initial display
-    displayCars(cars);
 
     // Search function
     function searchCars() {
