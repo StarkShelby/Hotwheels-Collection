@@ -9,58 +9,58 @@ function addToCollection(carName, carImage, carYear, carSeries) {
       series: carSeries,
     });
     localStorage.setItem("myCollection", JSON.stringify(collection));
-
-    animateFlyingCar(carName, carImage); // Call animation function
   }
 }
+function addToCollection(name, image, year, series, event) {
+  let myCollection = JSON.parse(localStorage.getItem("myCollection")) || [];
 
-function animateFlyingCar(carName, carImage) {
-  console.log(`Animating ${carName} to My Collection`); // Debugging
-
-  const myCollectionNav = document.getElementById("my-collection-nav");
-
-  if (!myCollectionNav) {
-    console.error("My Collection navbar not found.");
+  // Prevent duplicate entries
+  if (myCollection.some((car) => car.name === name)) {
+    alert("This car is already in your collection!");
     return;
   }
 
-  // Create a flying car element
-  const flyingCar = document.createElement("img");
-  flyingCar.src = carImage;
-  flyingCar.classList.add("flying-car-animation");
-  document.body.appendChild(flyingCar);
+  // Add car to localStorage
+  myCollection.push({ name, image, year, series });
+  localStorage.setItem("myCollection", JSON.stringify(myCollection));
+
+  // Find the clicked card and animate it
+  const card = event.target.closest(".car-card");
+  if (!card) return;
+
+  animateCardFlyToCollection(card, image);
+}
+
+// ✅ Function to animate the card flying into the `mycollection-navbar`
+function animateCardFlyToCollection(card, imageSrc) {
+  const navbar = document.getElementById("mycollection-navbar"); // Ensure this ID exists
+  if (!navbar) return;
 
   // Get positions
-  const button = document.querySelector(
-    `[data-car-name="${carName}"] .add-to-collection`
-  );
-  if (!button) {
-    console.error("Car button not found.");
-    return;
-  }
+  const cardRect = card.getBoundingClientRect();
+  const navbarRect = navbar.getBoundingClientRect();
 
-  const buttonRect = button.getBoundingClientRect();
-  const navRect = myCollectionNav.getBoundingClientRect();
+  // Create flying image
+  const flyingImage = document.createElement("img");
+  flyingImage.src = imageSrc;
+  flyingImage.classList.add("flying-card");
+  document.body.appendChild(flyingImage);
 
-  // Set initial position
-  flyingCar.style.position = "fixed";
-  flyingCar.style.top = `${buttonRect.top}px`;
-  flyingCar.style.left = `${buttonRect.left}px`;
-  flyingCar.style.width = "80px";
-  flyingCar.style.height = "auto";
-  flyingCar.style.zIndex = "1000";
+  // Set initial position (centered on the clicked card)
+  flyingImage.style.left = `${cardRect.left + cardRect.width / 2}px`;
+  flyingImage.style.top = `${cardRect.top + cardRect.height / 2}px`;
 
-  // Start animation
+  // Force reflow
+  flyingImage.offsetWidth;
+
+  // Animate to `mycollection-navbar`
+  flyingImage.style.transform = `translate(${
+    navbarRect.left - cardRect.left
+  }px, ${navbarRect.top - cardRect.top}px) scale(0.2)`;
+  flyingImage.style.opacity = "0";
+
+  // Remove after animation completes
   setTimeout(() => {
-    flyingCar.style.transition = "transform 0.8s ease-in-out, opacity 0.8s";
-    flyingCar.style.transform = `translate(${
-      navRect.left - buttonRect.left
-    }px, ${navRect.top - buttonRect.top}px) scale(0.5)`;
-    flyingCar.style.opacity = "0";
-  }, 50);
-
-  // Remove the clone after animation
-  setTimeout(() => {
-    flyingCar.remove();
-  }, 900);
+    flyingImage.remove();
+  }, 1000);
 }

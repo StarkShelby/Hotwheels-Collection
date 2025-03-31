@@ -294,7 +294,7 @@ body {
 
 .mc-container::after {
   top: 57%; /* Adjust to match right headlamp */
-  right: 67%; /* Adjust to match right headlamp */
+  right: 66%; /* Adjust to match right headlamp */
 }
 
 /* Show glow on hover */
@@ -555,11 +555,26 @@ h3 {
   animation: neonBounce 1.5s infinite alternate ease-in-out;
 }
 
-.flying-car-animation {
+.flying-card {
   position: fixed;
-  width: 80px; /* Adjust as needed */
+  width: 100px; /* Adjust size */
   height: auto;
-  z-index: 1000;
+  z-index: 9999;
   pointer-events: none;
-  transition: transform 0.8s ease-in-out, opacity 0.8s;
+  transition: transform 1s ease-in-out, opacity 1s ease-in-out;
+}
+
+.flying-card {
+  animation: flyToCollection 1s ease-in-out forwards;
+}
+
+@keyframes flyToCollection {
+  from {
+    transform: scale(1);
+    opacity: 1;
+  }
+  to {
+    transform: translate(-50vw, -50vh) scale(0.2);
+    opacity: 0;
+  }
 }
