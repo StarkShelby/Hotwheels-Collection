@@ -814,3 +814,41 @@ button.wishlist-btn {
   transition: all 0.3s ease;
   text-shadow: 0px 0px 15px rgba(255, 0, 255, 0.5);
 }
+
+/* animation for wishlist card */
+@keyframes heartBeat {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+button.wishlist-btn:hover {
+  animation: heartBeat 0.6s infinite;
+}
+/* Define the fade-out animation */
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.25;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Apply fade-out effect to .car-card elements when the class fade-out is added */
+.fade-out {
+  animation: fadeOut 0.3s ease-in; /* Apply fadeOut animation for 0.5 seconds */
+}
