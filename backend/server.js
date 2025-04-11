@@ -2,6 +2,18 @@ const express = require("express");
 const cors = require("cors");
 const app = express();
 const path = require("path");
+const Car = require("./models/carSchema");
+const mongoose = require("mongoose");
+
+// Enable CORS for your frontend (replace with your Vercel URL)
+app.use(
+  cors({
+    origin: "https://https://hotwheelscollection.vercel.app/.vercel.app", // Replace with your actual Vercel URL
+  })
+);
+
+// Middleware to parse JSON bodies
+app.use(express.json());
 
 app.use(cors()); // Allow frontend to fetch data
 app.use(express.static("data")); // Serve the data folder
@@ -26,6 +38,17 @@ app.post("/add-to-collection/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+// MongoDB connection
+mongoose
+  .connect(
+    "mongodb+srv://sharique:sharique@cluster0.skrnl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log("Database connected successfully"))
+  .catch((err) => console.log("Database connection error:", err));
 
 const PORT = 5001;
 app.listen(PORT, () => console.log(`Server running on port  ${PORT} ✅✅`));
