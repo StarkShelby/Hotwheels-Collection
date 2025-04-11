@@ -1,3 +1,9 @@
+const express = require("express");
+const router = express.Router(); // Create router instance
+
+const Car = require("../models/carSchema");
+
+// Define the route
 router.get("/cars", async (req, res) => {
   try {
     console.log("Fetching cars from database...");
@@ -9,3 +15,6 @@ router.get("/cars", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
+
+// Export the router so it can be used in other files
+module.exports = router;
