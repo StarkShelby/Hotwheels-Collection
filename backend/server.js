@@ -1,4 +1,5 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
 const app = express();
 const path = require("path");
@@ -26,6 +27,16 @@ app.post("/add-to-collection/:id", async (req, res) => {
     res.status(500).json({ error: "Internal Server Error" });
   }
 });
-
+// MongoDB connection
+mongoose
+  .connect(
+    "mongodb+srv://sharique:sharique@cluster0.skrnl.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
+  .then(() => console.log("Database connected successfully✅✅"))
+  .catch((err) => console.log("Database connection error:", err));
 const PORT = 5001;
 app.listen(PORT, () => console.log(`Server running on port  ${PORT} ✅✅`));
