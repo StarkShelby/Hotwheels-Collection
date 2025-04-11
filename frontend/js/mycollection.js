@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const response = await fetch("http://localhost:5001/cars");
+    const response = await fetch("https://hotwheels-backend.onrender.com/cars");
     let cars = await response.json();
 
     const carsContainer = document.getElementById("cars-container");

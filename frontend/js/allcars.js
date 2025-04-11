@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
   try {
-    const response = await fetch("http://localhost:5001/cars"); // Fetch data from backend
+    const response = await fetch("https://hotwheels-backend.onrender.com/cars"); // Fetch data from backend
     const carsData = await response.json(); // Store all cars data
 
     const carsContainer = document.getElementById("cars-container");
