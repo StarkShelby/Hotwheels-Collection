@@ -5,17 +5,21 @@ const path = require("path");
 const Car = require("./models/carSchema");
 const mongoose = require("mongoose");
 
-// Enable CORS for your frontend (replace with your Vercel URL)
+// Root route
+app.get("/", (req, res) => {
+  res.send("Hot Wheels backend is live! 🏎️🔥");
+});
+
+// Enable CORS for your frontend
 app.use(
   cors({
-    origin: "https://https://hotwheelscollection.vercel.app/.vercel.app", // Replace with your actual Vercel URL
+    origin: "https://hotwheelscollection.vercel.app",
   })
 );
 
 // Middleware to parse JSON bodies
 app.use(express.json());
 
-app.use(cors()); // Allow frontend to fetch data
 app.use(express.static("data")); // Serve the data folder
 
 app.get("/cars", (req, res) => {
